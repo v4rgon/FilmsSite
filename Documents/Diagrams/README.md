@@ -4,4 +4,4 @@
 3. [Диаграмма последовательности](https://github.com/rokez98/FilmsSite/blob/master/Documents/Diagrams/Sequence.md)
 4. [Диаграмма классов](https://github.com/rokez98/FilmsSite/blob/master/Documents/Diagrams/Classes.md)
 5. [Диаграмма состояний](https://github.com/rokez98/FilmsSite/blob/master/Documents/Diagrams/State.md)
-6. [Диаграмма развёртывания](#)
+6. [Диаграмма развёртывания](https://github.com/rokez98/FilmsSite/blob/master/Documents/Diagrams/Deployment.md)
