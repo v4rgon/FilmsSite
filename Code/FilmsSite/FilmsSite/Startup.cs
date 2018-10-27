@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using FilmsSite.BLL.Interfaces;
 using FilmsSite.BLL.Options;
 using FilmsSite.BLL.Services;
@@ -10,6 +11,7 @@ using FilmsSite.DAL.Data;
 using FilmsSite.DAL.Entities;
 using FilmsSite.DAL.Interfaces;
 using FilmsSite.DAL.Repositories;
+using FilmsSite.WebAPI.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -53,13 +55,13 @@ namespace FilmsSite
             services.AddScoped<IPhotoRepository, EfPhotosRepository>();
             services.AddScoped<IRatingsRepository, EfRatingsRepository>();
 
+            services.AddScoped<ICommentsService, CommentsSerivce>();
             services.AddScoped<IFilmsService, FilmsService>();
             services.AddScoped<IRatingsService, RatingsService>();
             services.AddScoped<IPhotosService, PhotosService>();
             services.AddScoped<IFilesService, FilesService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();
-
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -101,6 +103,8 @@ namespace FilmsSite
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
+
+            Mapper.Initialize(cfg => cfg.AddProfiles("FilmsSite.WebAPI", "FilmsSite.BLL"));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -117,6 +121,10 @@ namespace FilmsSite
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
+            app.UseSignalR(route =>
+            {
+                route.MapHub<CommentsHub>("/comments");
+            });
             app.UseMvc();
         }
     }
