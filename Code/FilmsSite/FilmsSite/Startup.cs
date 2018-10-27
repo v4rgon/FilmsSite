@@ -54,6 +54,8 @@ namespace FilmsSite
             services.AddScoped<IRatingsRepository, EfRatingsRepository>();
 
             services.AddScoped<IFilmsService, FilmsService>();
+            services.AddScoped<IRatingsService, RatingsService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
