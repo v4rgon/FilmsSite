@@ -12,6 +12,7 @@ namespace FilmsSite.BLL.Interfaces
         Task<bool> IsUserExist(string username);
         Task ConfirmEmail(string username, string code);
         Task ResetPassword(string username);
+        Task ConfirmResetPassword(ResetPasswordDTO resetPasswordDto);
         Task UpdateUsersRefreshTokenAsync(string username, string refreshToken);
     }
 }

@@ -1,13 +1,11 @@
-﻿using FilmsSite.BLL.Interfaces;
+﻿using AutoMapper;
+using FilmsSite.BLL.Exceptions;
+using FilmsSite.BLL.Interfaces;
 using FilmsSite.BLL.Models;
 using FilmsSite.DAL.Entities;
 using FilmsSite.DAL.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using FilmsSite.BLL.Exceptions;
-using AutoMapper;
 
 namespace FilmsSite.BLL.Services
 {
