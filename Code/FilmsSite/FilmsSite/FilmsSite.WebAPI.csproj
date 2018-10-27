@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FilmsSite.BLL\FilmsSite.BLL.csproj" />
     <ProjectReference Include="..\FilmsSite.DAL\FilmsSite.DAL.csproj" />
   </ItemGroup>
 

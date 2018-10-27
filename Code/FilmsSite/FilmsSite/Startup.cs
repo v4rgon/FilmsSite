@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FilmsSite.BLL.Interfaces;
+using FilmsSite.BLL.Services;
 using FilmsSite.DAL.Data;
 using FilmsSite.DAL.Entities;
 using FilmsSite.DAL.Interfaces;
@@ -48,6 +50,9 @@ namespace FilmsSite
             services.AddScoped<IUserRepository, EfUserRepository>();
             services.AddScoped<IPhotoRepository, EfPhotosRepository>();
             services.AddScoped<IRatingsRepository, EfRatingsRepository>();
+
+            services.AddScoped<IFilmsService, FilmsService>();
+            services.AddScoped<ITokenService, TokenService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
