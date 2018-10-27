@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmsSite", "FilmsSite\FilmsSite.csproj", "{1339CBDE-22CC-4A75-90CE-4B40900256AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmsSite.WebAPI", "FilmsSite\FilmsSite.WebAPI.csproj", "{1339CBDE-22CC-4A75-90CE-4B40900256AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmsSite.DAL", "FilmsSite.DAL\FilmsSite.DAL.csproj", "{235A9AD8-7A37-491F-96D2-A9CE98BDF4C6}"
 EndProject

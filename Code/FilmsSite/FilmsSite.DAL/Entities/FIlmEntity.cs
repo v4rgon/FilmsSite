@@ -1,0 +1,24 @@
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FilmsSite.DAL.Entities
+{
+    public class FilmEntity
+    {
+        public int Id { get; set; }
+
+        public string Title { get; set; }
+        public int Year { get; set; }
+        public string Genre { get; set; }
+        public string Director { get; set; }
+        public string PictureUrl { get; set; }
+        public string Description { get; set; }
+        public decimal Rating { get; set; }
+        public string Duration { get; set; }
+        public List<PhotoEntity> Photos { get; set; }
+        public List<CommentEntity> Comments { get; set; }
+        public int Metascore { get; set; }
+        public string Storyline { get; set; }
+    }
+}
