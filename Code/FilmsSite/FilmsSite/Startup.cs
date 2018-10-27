@@ -55,8 +55,11 @@ namespace FilmsSite
 
             services.AddScoped<IFilmsService, FilmsService>();
             services.AddScoped<IRatingsService, RatingsService>();
+            services.AddScoped<IPhotosService, PhotosService>();
+            services.AddScoped<IFilesService, FilesService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();
+
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
