@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FilmsSite.BLL.Interfaces;
+using FilmsSite.BLL.Options;
 using FilmsSite.BLL.Services;
 using FilmsSite.DAL.Data;
 using FilmsSite.DAL.Entities;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
@@ -55,6 +57,9 @@ namespace FilmsSite
             services.AddScoped<ITokenService, TokenService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
