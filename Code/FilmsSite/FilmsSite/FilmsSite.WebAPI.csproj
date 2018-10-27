@@ -8,7 +8,6 @@
     <Folder Include="wwwroot\" />
     <Folder Include="Extensions\" />
     <Folder Include="Hubs\" />
-    <Folder Include="Profiles\" />
   </ItemGroup>
 
   <ItemGroup>
