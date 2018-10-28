@@ -12,6 +12,8 @@ import { Divider, Button } from "@material-ui/core";
 
 import styles from "./styles";
 
+import RatingContainer from "../../Rating/containers/RatingContainer";
+
 import InfoBlock from "../../InfoBlock";
 import { urls } from "./../../../constants/urls";
 import LoadingSpinner from "../../LoadingSpinner";
@@ -135,6 +137,9 @@ const FilmDetailedCard = ({
 
       <InfoBlock title={"Genre"} content={genre} />
       <InfoBlock title={"Storyline"} content={storyline} />
+    
+      <RatingContainer filmid={id} rating={rating} />
+      
     </div>
   );
 };
