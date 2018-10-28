@@ -7,19 +7,20 @@ import { persistReducer } from "redux-persist";
 
 const Store = {
   store: undefined,
-  getInstance: () => {
-    if (this.store === undefined) {
+  getInstance() {
+    if (this.store  === undefined) {
       const persistConfig = {
         key: "root",
         storage,
         whitelist: ["session"]
       };
-
+      
       const sagaMiddleware = createSagaMiddleware();
       this.store = createStore(
         persistReducer(persistConfig, rootReducer),
-        window.__REDUX_DEVTOOLS_EXTENSION__ &&
-          window.__REDUX_DEVTOOLS_EXTENSION__(),
+        ["Use Redux"],
+        // window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        //   window.__REDUX_DEVTOOLS_EXTENSION__(),
         applyMiddleware(sagaMiddleware)
       );
 

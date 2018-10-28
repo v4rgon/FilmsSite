@@ -1,0 +1,21 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+body {
+  background-image: url('http://s3-us-west-2.amazonaws.com/techvibes/wp-content/uploads/2017/04/24135159/Netflix-Background.jpg');
+  background-size: "cover";
+}
+
+#root {
+  height: 100%;
+  flex-grow: 1;
+}
+
+#ReactGridGallery {
+  display: flex;
+  overflow-y: auto;
+}

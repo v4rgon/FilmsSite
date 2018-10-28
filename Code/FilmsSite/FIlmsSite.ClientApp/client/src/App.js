@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { persistStore} from "redux-persist";
+import { persistStore } from "redux-persist";
 
 import TabsContainer from "./modules/Tabs/containers/TabsContainer";
 import { Routes } from "./Routes";
