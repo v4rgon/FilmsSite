@@ -14,6 +14,7 @@ import styles from "./styles";
 
 import CommentsContainer from "../../Comments/containers/CommentsContainer";
 import RatingContainer from "../../Rating/containers/RatingContainer";
+import PhotosContainer from "../../Photos/containers/PhotosContainer";
 
 import InfoBlock from "../../InfoBlock";
 import { urls } from "./../../../constants/urls";
@@ -140,6 +141,7 @@ const FilmDetailedCard = ({
       <InfoBlock title={"Storyline"} content={storyline} />
     
       <RatingContainer filmid={id} rating={rating} />
+      <PhotosContainer filmid={id} />
       <CommentsContainer filmid={id} />
       
     </div>

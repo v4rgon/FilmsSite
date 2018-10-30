@@ -9,6 +9,7 @@
     "axios": "^0.18.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-grid-gallery": "^0.5.1",
     "react-hot-loader": "^4.3.11",
     "react-rater": "^5.0.3",
     "react-redux": "^5.1.0",
