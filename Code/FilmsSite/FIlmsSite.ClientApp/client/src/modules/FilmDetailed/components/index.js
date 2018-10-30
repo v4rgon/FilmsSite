@@ -12,6 +12,7 @@ import { Divider, Button } from "@material-ui/core";
 
 import styles from "./styles";
 
+import CommentsContainer from "../../Comments/containers/CommentsContainer";
 import RatingContainer from "../../Rating/containers/RatingContainer";
 
 import InfoBlock from "../../InfoBlock";
@@ -139,6 +140,7 @@ const FilmDetailedCard = ({
       <InfoBlock title={"Storyline"} content={storyline} />
     
       <RatingContainer filmid={id} rating={rating} />
+      <CommentsContainer filmid={id} />
       
     </div>
   );
