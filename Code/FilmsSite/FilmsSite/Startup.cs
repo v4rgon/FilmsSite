@@ -11,6 +11,7 @@ using FilmsSite.DAL.Data;
 using FilmsSite.DAL.Entities;
 using FilmsSite.DAL.Interfaces;
 using FilmsSite.DAL.Repositories;
+using FilmsSite.DAL.Seed;
 using FilmsSite.WebAPI.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -48,6 +49,8 @@ namespace FilmsSite
                 {
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
+
+            services.AddSignalR();
 
             services.AddScoped<IFilmsRepository, EfFilmsRepository>();
             services.AddScoped<ICommentsRepository, EfCommentsRepository>();
@@ -109,6 +112,8 @@ namespace FilmsSite
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            SeedDatabase.Initialize(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider).Wait();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
