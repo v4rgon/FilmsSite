@@ -6,6 +6,7 @@ import LoginFormContainer from "./modules/Forms/LoginForm/containers/LoginFormCo
 import FilmsListContainer from "./modules/FilmsList/containers/FilmsListContainer";
 import RegisterFormContainer from "./modules/Forms/RegisterForm/containers/RegisterFormContainer";
 import FilmDetailedContainer from "./modules/FilmDetailed/containers/FilmDetailedContainer";
+import EmailConfirmationContainer from "./modules/EmailConfirmation/containers/EmailConfirmationContainer";
 
 export const Routes = () => (
   <Switch>
@@ -13,7 +14,9 @@ export const Routes = () => (
     <Route path={urls.login} component={LoginFormContainer} />
     <Route exact path={urls.films} component={FilmsListContainer} />
     <Route path={urls.filmDetails} component={FilmDetailedContainer} />
-    
+    <Route path={urls.confirmEmail} component={EmailConfirmationContainer} />
+   
+
     <Redirect to={urls.notFound} />
   </Switch>
 );
