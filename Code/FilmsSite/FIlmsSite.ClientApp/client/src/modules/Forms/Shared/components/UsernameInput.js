@@ -15,11 +15,12 @@ const UsernameInput = ({
 }) => (
   <FormInputField classes={classes} touched={touched} error={error} title="Username">
     <Input
+      name="username"
       {...input}
-      error={error && touched}
       type="text"
+      error={error && touched}
       required
-      onBlur={checkIsUsernameAvailible}
+      onBlurCapture={checkIsUsernameAvailible}
     />
     {isValidating && <LinearProgress />}
   </FormInputField>

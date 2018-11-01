@@ -79,7 +79,7 @@ ForgetPasswordForm.propTypes = {
 export default withStyles(styles)(
   reduxForm({
     form: "forgetPassword",
-    touchOnChange: true,
+    touchOnChange: false,
     touchOnBlur: true,
     initialValues: {
       username: "",

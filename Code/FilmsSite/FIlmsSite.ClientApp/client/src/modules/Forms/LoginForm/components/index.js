@@ -63,14 +63,13 @@ LoginForm.propTypes = {
   login: PropTypes.func.isRequired,
   showPassword: PropTypes.bool,
   handleSubmit: PropTypes.func.isRequired,
-  isValidating: PropTypes.bool,
-  onGoogleLoginSuccess: PropTypes.func.isRequired
+  isValidating: PropTypes.bool
 };
 
 export default withStyles(styles)(
   reduxForm({
     form: "login",
-    touchOnChange: true,
+    touchOnChange: false,
     touchOnBlur: true,
     initialValues: {
       username: "",

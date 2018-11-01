@@ -27,8 +27,8 @@ export const {
 
   CHECK_AVAILIBLE_REQUEST: username => ({
     method: "POST",
-    url: "/api/account/availible",
-    data: { username }
+    url: `/api/account/availible/${username}`,
+    data: {}
   }),
   CHECK_AVAILIBLE_SUCCESS: data => ({ data }),
   CHECK_AVAILIBLE_ERROR: data => ({ data })

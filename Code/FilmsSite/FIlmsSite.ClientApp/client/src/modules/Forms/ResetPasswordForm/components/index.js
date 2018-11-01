@@ -95,7 +95,7 @@ ResetPasswordForm.propTypes = {
 export default withStyles(styles)(
   reduxForm({
     form: "resetPassword",
-    touchOnChange: true,
+    touchOnChange: false,
     touchOnBlur: true,
     initialValues: {
       username: "",

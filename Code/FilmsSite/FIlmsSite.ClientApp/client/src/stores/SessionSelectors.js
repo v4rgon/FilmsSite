@@ -1,7 +1,6 @@
 export function getToken(state) {
-    //if (state.session.token && state.session) return state.session.token.token;
-    // else
-     return undefined;
+    if (state.session.token) return state.session.token.token;
+    else return undefined;
   }
   
   export function getUsersData(state) {

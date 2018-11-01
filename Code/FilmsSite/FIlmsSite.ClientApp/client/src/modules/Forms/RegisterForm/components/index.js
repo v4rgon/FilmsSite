@@ -75,7 +75,7 @@ RegisterForm.propTypes = {
 export default withStyles(styles)(
   reduxForm({
     form: "register",
-    touchOnChange: true,
+    touchOnChange: false,
     touchOnBlur: true,
     initialValues: {
       username: "",

@@ -21,9 +21,10 @@ export const RegisterFormReducer = handleActions(
     }),
     [actions.checkAvailibleSuccess]: state => ({
       ...state,
+      syncErrors: {...state.syncErrors, username: undefined},
       isValidating: false
     }),
-    [actions.checkAvailibleError]: (state, { payload: { data } }) => ({
+    [actions.checkAvailibleError]: (state, { payload: { data } }) =>  ({
       ...state,
       isValidating: false,
       syncErrors: { ...state.syncErrors, ...data }

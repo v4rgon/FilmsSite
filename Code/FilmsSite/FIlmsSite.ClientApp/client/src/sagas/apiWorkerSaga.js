@@ -30,7 +30,7 @@ export function* ApiRequestAsync(action) {
     if (response.status !== 200) {
       yield put({
         type: getErrorAction(action),
-        payload: response
+        payload: response.response
       });
     } else {
       yield put({

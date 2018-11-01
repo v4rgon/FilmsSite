@@ -20,7 +20,7 @@ namespace FilmsSite.WebAPI.Controllers
             _userService = userSerivce;
         }
 
-        [HttpPost("availible")]
+        [HttpPost("availible/{username}")]
         public async Task<ActionResult> IsUsernameAvailible(string username)
         {
             if (await _userService.IsUserExist(username))

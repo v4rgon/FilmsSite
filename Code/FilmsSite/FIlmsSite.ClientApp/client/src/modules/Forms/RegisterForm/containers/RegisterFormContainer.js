@@ -24,9 +24,10 @@ class RegisterFormContainer extends React.Component {
     // console.log(user);
   };
 
-  validateValues = ({ username, password, confirm, email }) => {
-    const errors = {};
-    errors.username = validators.validateUsername(username);
+  validateValues = ( { username, password, confirm, email }, {syncErrors}) => {
+    console.log(syncErrors);
+    const errors = {}; 
+    errors.username = Array.isArray(syncErrors.username) ? syncErrors.username : validators.validateUsername(username);
     errors.password = validators.validatePassword(password);
     errors.email = validators.validateMail(email);
     if (password !== confirm) {
