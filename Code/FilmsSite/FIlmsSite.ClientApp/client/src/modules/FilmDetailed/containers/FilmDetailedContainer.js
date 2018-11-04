@@ -24,6 +24,20 @@ class FilmDetailedContainer extends Component {
     detailsUpdateRequest(values);
   };
 
+  addToCollection = () => {
+    const { addToCollectionRequest } = this.props;
+    const { id } = this.state;
+    console.log(id);
+    addToCollectionRequest(id);
+  };
+
+  removeFromCollection = () => {
+    const { removeFromCollectionRequest } = this.props;
+    const { id } = this.state;
+    console.log(id);
+    removeFromCollectionRequest(id);
+  };
+
   componentDidMount() {
     const { detailsRequest } = this.props;
     const { id } = this.state;
@@ -62,7 +76,9 @@ class FilmDetailedContainer extends Component {
       storyline,
       isError,
       isLoading,
-      handleSaveChanges: this.handleSaveChanges
+      handleSaveChanges: this.handleSaveChanges,
+      addToCollection: this.addToCollection,
+      removeFromCollection: this.removeFromCollection
     };
     return <FilmDetailedCard {...props} />;
   }

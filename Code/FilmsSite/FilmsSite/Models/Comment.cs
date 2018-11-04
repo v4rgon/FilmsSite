@@ -16,7 +16,7 @@ namespace FilmsSite.WebAPI.Models
         [JsonProperty("user")]
         public UserBrief User { get; set; }
 
-        [JsonProperty("film")]
+        [JsonProperty("Film")]
         public FilmBrief Film { get; set; }
     }
 }

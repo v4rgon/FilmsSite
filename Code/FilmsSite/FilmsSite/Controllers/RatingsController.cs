@@ -17,12 +17,12 @@ namespace FilmsSite.WebAPI.Controllers
     public class RatingsController : Controller
     {
         private readonly IRatingsService _ratingsService;
-        private readonly IFilmsService _filmsService;
+        private readonly IFilmsService _FilmsService;
 
-        public RatingsController(IRatingsService ratingsService, IFilmsService filmsService)
+        public RatingsController(IRatingsService ratingsService, IFilmsService FilmsService)
         {
             _ratingsService = ratingsService;
-            _filmsService = filmsService;
+            _FilmsService = FilmsService;
         }
 
         [Authorize]
@@ -39,7 +39,7 @@ namespace FilmsSite.WebAPI.Controllers
             try
             {
                 await _ratingsService.AddRatingAsync(ratingDto);
-                await _filmsService.UpdateRatingAsync(model.FilmId);
+                await _FilmsService.UpdateRatingAsync(model.FilmId);
 
                 return Ok(_ratingsService.GetRating(model.FilmId, ratingDto.UserId));
             }
@@ -73,7 +73,7 @@ namespace FilmsSite.WebAPI.Controllers
             {
                 var userId = HttpContext.GetCurrentUserId();
                 await _ratingsService.RemoveRatingAsync(userId, id);
-                await _filmsService.UpdateRatingAsync(id);
+                await _FilmsService.UpdateRatingAsync(id);
 
                 return Ok(Mapper.Map<RatingDTO, RatingResponse>(_ratingsService.GetRating(id, userId)));
             }

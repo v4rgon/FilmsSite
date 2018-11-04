@@ -7,22 +7,24 @@ namespace FilmsSite.BLL.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<CommentDTO, CommentEntity>();
-            CreateMap<CommentEntity, CommentDTO>();
+            CreateMap<CommentDTO, Comment>();
+            CreateMap<Comment, CommentDTO>();
 
-            CreateMap<UpdateRatingDTO, RatingEntity>();
-            CreateMap<RatingEntity, UpdateRatingDTO>();
+            CreateMap<UpdateRatingDTO, Rating>()
+                .ForMember(model => model.Value, _ => _.MapFrom(poco => poco.Rating));
+            CreateMap<Rating, UpdateRatingDTO>()
+                .ForMember(model => model.Rating, _ => _.MapFrom(poco => poco.Value));
 
-            CreateMap<FilmDTO, FilmEntity>();
-            CreateMap<FilmEntity, FilmDTO>();
+            CreateMap<FilmDTO, Film>();
+            CreateMap<Film, FilmDTO>();
 
-            CreateMap<PhotoDTO, PhotoEntity>();
-            CreateMap<PhotoEntity, PhotoDTO>();
+            CreateMap<PhotoDTO, Photo>();
+            CreateMap<Photo, PhotoDTO>();
 
-            CreateMap<UserEntity, UserDTO>();
-            CreateMap<UserDTO, UserEntity>();
+            CreateMap<User, UserDTO>();
+            CreateMap<UserDTO, User>();
 
-            CreateMap<RegistrationDTO, UserEntity>();
+            CreateMap<RegistrationDTO, User>();
         }
     }
 }

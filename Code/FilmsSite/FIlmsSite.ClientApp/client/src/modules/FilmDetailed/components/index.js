@@ -37,6 +37,8 @@ const FilmDetailedCard = ({
   duration,
   isError,
   handleSaveChanges,
+  addToCollection,
+  removeFromCollection,
   isLoading
 }) => {
   return isError ? (
@@ -48,6 +50,8 @@ const FilmDetailedCard = ({
     </Card>
   ) : (
     <div className={classNames(classes.middleWrapper, classes.filmContainer)}>
+      <Button onClick={addToCollection} color="secondary">Add to collection</Button>
+      <Button onClick={removeFromCollection} color="primary">Remove from collection</Button>
       <div className={classes.cardContainer}>
         {isLoading ? (
           <LoadingSpinner />
@@ -164,7 +168,9 @@ FilmDetailedCard.propTypes = {
   storyline: PropTypes.string,
   isError: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  handleSaveChanges: PropTypes.func.isRequired
+  handleSaveChanges: PropTypes.func.isRequired,
+  addToCollection: PropTypes.func.isRequired,
+  removeFromCollection: PropTypes.func.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(FilmDetailedCard);

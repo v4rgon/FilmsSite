@@ -9,12 +9,13 @@ namespace FilmsSite.DAL.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         ApplicationDbContext ApplicationDataBaseContext { get; }
-        UserManager<UserEntity> UserManager { get; }
-        SignInManager<UserEntity> SignInManager { get; }
+        UserManager<User> UserManager { get; }
+        SignInManager<User> SignInManager { get; }
         IFilmsRepository Films { get; }
         ICommentsRepository Comments { get; }
         IUserRepository Users { get; }
         IPhotoRepository Photos { get; }
+        IUserFilmsRepository UserFilms { get; }
         IRatingsRepository Ratings { get; }
         Task SaveAsync();
     }

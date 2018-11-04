@@ -6,8 +6,8 @@ namespace FilmsSite.BLL.Interfaces
     public interface IRatingsService
     {
         Task AddRatingAsync(UpdateRatingDTO ratingDto);
-        Task RemoveRatingAsync(string userId, int filmId);
-        RatingDTO GetRating(int filmId, string userId);
-        decimal GetFilmsAverageRating(int filmId);
+        Task RemoveRatingAsync(string userId, int FilmId);
+        RatingDTO GetRating(int FilmId, string userId);
+        decimal GetFilmsAverageRating(int FilmId);
     }
 }

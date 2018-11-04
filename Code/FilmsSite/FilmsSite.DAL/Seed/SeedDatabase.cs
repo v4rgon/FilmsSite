@@ -1,12 +1,12 @@
 ﻿using FilmsSite.DAL.Data;
 using FilmsSite.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 
 namespace FilmsSite.DAL.Seed
 {
@@ -17,22 +17,22 @@ namespace FilmsSite.DAL.Seed
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
             context.Database.Migrate();
 
-            var userManager = serviceProvider.GetRequiredService<UserManager<UserEntity>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            var showshankComment1 = new CommentEntity() { Date = DateTime.Now, Disikes = 5, Likes = 15, Text = "Wonderful film!" };
-            var showshankComment2 = new CommentEntity() { Date = DateTime.Now, Disikes = 7, Likes = 10, Text = "Such a great movie!" };
+            var showshankComment1 = new Comment() { Date = DateTime.Now, Disikes = 5, Likes = 15, Text = "Wonderful Film!" };
+            var showshankComment2 = new Comment() { Date = DateTime.Now, Disikes = 7, Likes = 10, Text = "Such a great movie!" };
 
             if (!context.Users.Any())
             {
                 await roleManager.CreateAsync(new IdentityRole("Admin"));
                 await roleManager.CreateAsync(new IdentityRole("User"));
 
-                var user = new UserEntity()
+                var user = new User()
                 {
                     UserName = "admin",
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    Comments = new List<CommentEntity>()
+                    Comments = new List<Comment>()
                     {
                         showshankComment1,
                         showshankComment2
@@ -47,9 +47,9 @@ namespace FilmsSite.DAL.Seed
 
             if (!context.Films.Any())
             {
-                new List<FilmEntity>()
+                new List<Film>()
                 {
-                    new FilmEntity()
+                    new Film()
                     {
                         Title = "The Shawshank Redemption",
                         Year = 1994,
@@ -59,76 +59,76 @@ namespace FilmsSite.DAL.Seed
                         Director = "Frank Darabont",
                         Rating = 0,
                         Metascore = 100,
-                        Photos = new List<PhotoEntity>()
+                        Photos = new List<Photo>()
                         {
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTM0NjUxMDk5MF5BMl5BanBnXkFtZTcwNDMxNDY3Mw@@._V1_UY100_CR25,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMTM0NjUxMDk5MF5BMl5BanBnXkFtZTcwNDMxNDY3Mw@@._V1_SY1000_SX1500_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTk3NDE2Nzg3Nl5BMl5BanBnXkFtZTcwNTMxNDY3Mw@@._V1_UY100_CR25,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMTk3NDE2Nzg3Nl5BMl5BanBnXkFtZTcwNTMxNDY3Mw@@._V1_SY1000_CR0,0,1503,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTg0MDgwNjc5N15BMl5BanBnXkFtZTcwNjMxNDY3Mw@@._V1_UX100_CR0,0,100,100_AL_.jpg",
                                 Fullsize ="https://m.media-amazon.com/images/M/MV5BMTg0MDgwNjc5N15BMl5BanBnXkFtZTcwNjMxNDY3Mw@@._V1_SY1000_CR0,0,661,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTkzMTY0MjE5MV5BMl5BanBnXkFtZTcwODMxNDY3Mw@@._V1_UY100_CR26,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMTkzMTY0MjE5MV5BMl5BanBnXkFtZTcwODMxNDY3Mw@@._V1_SY1000_CR0,0,1526,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BNTYxOTYyMzE3NV5BMl5BanBnXkFtZTcwOTMxNDY3Mw@@._V1_UY100_CR24,0,100,100_AL_.jpg",
                                 Fullsize ="https://m.media-amazon.com/images/M/MV5BMTgxMTU1MDkwOV5BMl5BanBnXkFtZTcwMDQxNDY3Mw@@._V1_SY1000_CR0,0,1487,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTQ5NTI4NDAxMV5BMl5BanBnXkFtZTcwMTQxNDY3Mw@@._V1_UY100_CR25,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMTQ5NTI4NDAxMV5BMl5BanBnXkFtZTcwMTQxNDY3Mw@@._V1_SY1000_CR0,0,1496,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTMyODE3NTM1Ml5BMl5BanBnXkFtZTcwMzQxNDY3Mw@@._V1_UY100_CR24,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMTMyODE3NTM1Ml5BMl5BanBnXkFtZTcwMzQxNDY3Mw@@._V1_SY1000_CR0,0,1487,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTMxNzAwMzE0Nl5BMl5BanBnXkFtZTcwNDQxNDY3Mw@@._V1_UY100_CR25,0,100,100_AL_.jpg",
                                 Fullsize = ""
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTg3Nzg3ODU0NV5BMl5BanBnXkFtZTcwNTQxNDY3Mw@@._V1_UY100_CR39,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMTg3Nzg3ODU0NV5BMl5BanBnXkFtZTcwNTQxNDY3Mw@@._V1_SX1777_CR0,0,1777,999_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BNzAwOTk3MDg5MV5BMl5BanBnXkFtZTcwNjQxNDY3Mw@@._V1_UY100_CR30,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BNzAwOTk3MDg5MV5BMl5BanBnXkFtZTcwNjQxNDY3Mw@@._V1_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTg4MDA2MDM5Nl5BMl5BanBnXkFtZTcwOTU5MTQ2Mg@@._V1_UY100_CR23,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMTg4MDA2MDM5Nl5BMl5BanBnXkFtZTcwOTU5MTQ2Mg@@._V1_SX1471_CR0,0,1471,999_AL_.jpg"
                             },
                         },
-                        Comments = new List<CommentEntity>()
+                        Comments = new List<Comment>()
                         {
                             showshankComment1,
                             showshankComment2
                         },
                         Storyline = "Chronicles the experiences of a formerly successful banker" +
                                     " as a prisoner in the gloomy jailhouse of Shawshank after being found guilty of a crime he did not commit." +
-                                    " The film portrays the man's unique way of dealing with his new, torturous life; along the way he befriends a number of fellow prisoners," +
+                                    " The Film portrays the man's unique way of dealing with his new, torturous life; along the way he befriends a number of fellow prisoners," +
                                     " most notably a wise long-term inmate named Red.",
                         Duration = "2h 55m"
                     },
-                    new FilmEntity()
+                    new Film()
                     {
                         Title = "The Godfather",
                         Year = 1972,
@@ -139,56 +139,56 @@ namespace FilmsSite.DAL.Seed
                         Rating = 0,
                         Duration = "2h 55m",
                         Metascore = 100,
-                        Photos = new List<PhotoEntity>()
+                        Photos = new List<Photo>()
                         {
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTczMTk5MjkwOF5BMl5BanBnXkFtZTgwMDI0Mjk1NDM@._V1_UY100_CR12,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMTczMTk5MjkwOF5BMl5BanBnXkFtZTgwMDI0Mjk1NDM@._V1_SY1000_CR0,0,1248,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTU4MTgxOTQ0Nl5BMl5BanBnXkFtZTgwNDI0Mjk1NDM@._V1_UY100_CR19,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMTU4MTgxOTQ0Nl5BMl5BanBnXkFtZTgwNDI0Mjk1NDM@._V1_SX1375_CR0,0,1375,999_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BYTgzZTJlMDUtMGIxNy00ODJiLWI3NjAtYzQ4OTQ3MGQ3ZGYwXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UX100_CR0,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BYTgzZTJlMDUtMGIxNy00ODJiLWI3NjAtYzQ4OTQ3MGQ3ZGYwXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_SY1000_CR0,0,672,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BOGU1YjI0NmEtN2JiZi00YWRjLWJkMjctODFlMjgyYTA1MmJiXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY100_CR17,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BOGU1YjI0NmEtN2JiZi00YWRjLWJkMjctODFlMjgyYTA1MmJiXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_SY1000_CR0,0,1350,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BNjk3MWYyZjAtY2M5Ni00OTIzLTkxMTItZWEwM2M2Y2E3NDcxXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UY100_CR13,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BNjk3MWYyZjAtY2M5Ni00OTIzLTkxMTItZWEwM2M2Y2E3NDcxXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_SY1000_CR0,0,1272,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMDhkYzhiYjEtMTQwYy00MTdmLTlkOTAtYTk1YmMyYmE5NDVmXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_UX100_CR0,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMDhkYzhiYjEtMTQwYy00MTdmLTlkOTAtYTk1YmMyYmE5NDVmXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_SY1000_CR0,0,657,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMTQ5MjY5NDU4NV5BMl5BanBnXkFtZTgwMTM1NjAyMDI@._V1_UY100_CR24,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMTQ5MjY5NDU4NV5BMl5BanBnXkFtZTgwMTM1NjAyMDI@._V1_SY1000_CR0,0,1488,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BMjAwNjgwNzI3Ml5BMl5BanBnXkFtZTgwODM0MDM4NzE@._V1_UX100_CR0,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BMjAwNjgwNzI3Ml5BMl5BanBnXkFtZTgwODM0MDM4NzE@._V1_SY1000_CR0,0,799,1000_AL_.jpg"
                             },
-                            new PhotoEntity()
+                            new Photo()
                             {
                                 Shortcut = "https://m.media-amazon.com/images/M/MV5BODQxNzk5NzY5MV5BMl5BanBnXkFtZTcwNDIyOTUzOA@@._V1_UY100_CR21,0,100,100_AL_.jpg",
                                 Fullsize = "https://m.media-amazon.com/images/M/MV5BODQxNzk5NzY5MV5BMl5BanBnXkFtZTcwNDIyOTUzOA@@._V1_SY1000_CR0,0,1429,1000_AL_.jpg"
                             }
                         }
                     },
-                    new FilmEntity()
+                    new Film()
                     {
                         Title = "The Dark Knight",
                         Year = 2008,
@@ -199,7 +199,7 @@ namespace FilmsSite.DAL.Seed
                         Rating = 0,
                         Metascore = 100,
                     },
-                    new FilmEntity()
+                    new Film()
                     {
                         Title = "Schindler's List",
                         Year = 1993,
@@ -211,7 +211,7 @@ namespace FilmsSite.DAL.Seed
                         Duration = "2h 55m",
                         Metascore = 100,
                     },
-                    new FilmEntity()
+                    new Film()
                     {
                         Title = "Fight Club",
                         Year = 1999,
@@ -223,7 +223,7 @@ namespace FilmsSite.DAL.Seed
                         Metascore = 100,
                         Duration = "2h 55m"
                     },
-                    new FilmEntity()
+                    new Film()
                     {
                         Title = "Lord of the Rings",
                         Year = 2003,
@@ -235,7 +235,7 @@ namespace FilmsSite.DAL.Seed
                         Metascore = 100,
                         Duration = "2h 55m"
                     }
-                }.ForEach(film => context.Films.Add(film));
+            }.ForEach(Film => context.Films.Add(Film));
                 context.SaveChanges();
             }
         }

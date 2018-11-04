@@ -6,7 +6,7 @@ namespace FilmsSite.BLL.Interfaces
 {
     public interface IPhotosService
     {
-        IEnumerable<PhotoDTO> GetByFilmId(int filmId);
+        IEnumerable<PhotoDTO> GetByFilmId(int FilmId);
 
         Task<PhotoDTO> AddPhotoToFilmAsync(string path, int id);
     }

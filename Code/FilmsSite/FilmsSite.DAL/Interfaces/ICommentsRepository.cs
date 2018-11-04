@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace FilmsSite.DAL.Interfaces
 {
-    public interface ICommentsRepository : IRepository<CommentEntity>
+    public interface ICommentsRepository : IRepository<Comment>
     {
-        IEnumerable<CommentEntity> GetByFilmId(int id);
+        IEnumerable<Comment> GetByFilmId(int id);
     }
 }

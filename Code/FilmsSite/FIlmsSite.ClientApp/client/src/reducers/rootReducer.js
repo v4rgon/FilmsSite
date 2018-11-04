@@ -12,6 +12,7 @@ import { SessionReducer } from "../stores/SessionReducer";
 import EmailConfirmationReducer from "../modules/EmailConfirmation/reducers/EmailConfirmationReducer";
 import { ForgetPasswordFormReducer } from "../modules/Forms/ForgetPasswordForm/reducers/ForgetPasswordFormReducer";
 import { ResetPasswordFormReducer } from "../modules/Forms/ResetPasswordForm/reducers/ResetPasswordReducer";
+import FilmsCollectionReducer from "../modules/FilmsCollection/reducers/FIlmsCollectionReducer";
 
 const rootReducer = combineReducers({
   form: formReducer.plugin({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     forgetPassword: ForgetPasswordFormReducer,
     resetPassword: ResetPasswordFormReducer
   }),
+  filmsCollection: FilmsCollectionReducer,
   filmsList: FilmListReducer,
   comments: CommentsReducer,
   photos: PhotosReducer,

@@ -15,14 +15,18 @@ class LoginFormContainer extends React.Component {
     Auth.signOut();
   };
 
-  onGoogleLoginSuccess = user => {
-    console.log(user);
-  };
-
   login = ({ username, password }) => {
     const { loginAuth, history } = this.props;
     loginAuth(username, password, history, "/films");
   };
+
+  validateValues = ( values, {syncErrors}) => {
+    const errors = {... syncErrors};
+    errors.username = undefined; 
+    errors.password = undefined;
+    return errors;
+  };
+
 
   render() {
     const { isValidating, visibility } = this.props;
@@ -32,9 +36,8 @@ class LoginFormContainer extends React.Component {
       showPassword: visibility,
       handleMouseDownPassword: this.handleMouseDownPassword,
       handleClickShowPassword: this.handleClickShowPassword,
-      isValidating: isValidating,
-      asyncValidate: this.asyncValidate,
-      onGoogleLoginSuccess: this.onGoogleLoginSuccess
+      validate: this.validateValues,
+      isValidating: isValidating
     };
     return <LoginForm {...props} />;
   }

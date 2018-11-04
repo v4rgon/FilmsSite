@@ -9,6 +9,7 @@ import FilmDetailedContainer from "./modules/FilmDetailed/containers/FilmDetaile
 import EmailConfirmationContainer from "./modules/EmailConfirmation/containers/EmailConfirmationContainer";
 import ResetPasswordContainer from "./modules/Forms/ResetPasswordForm/containers/ResetPasswordContainer";
 import ForgetPasswordContainer from "./modules/Forms/ForgetPasswordForm/containers/ForgetPasswordContainer";
+import FilmsCollectionContainer from "./modules/FilmsCollection/containers/FilmsCollectionContainer";
 
 export const Routes = () => (
   <Switch>
@@ -16,6 +17,7 @@ export const Routes = () => (
     <Route path={urls.register} component={RegisterFormContainer} />
     <Route path={urls.login} component={LoginFormContainer} />
     <Route exact path={urls.films} component={FilmsListContainer} />
+    <Route exact path={urls.collection} component={FilmsCollectionContainer} />
     <Route path={urls.filmDetails} component={FilmDetailedContainer} />
     <Route path={urls.confirmEmail} component={EmailConfirmationContainer} />
     <Route

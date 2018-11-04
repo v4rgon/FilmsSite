@@ -16,9 +16,9 @@ namespace FilmsSite.BLL.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ITokenService _tokenService;
         private readonly IEmailSender _emailSender;
-        private readonly UserManager<UserEntity> _userManager;
+        private readonly UserManager<User> _userManager;
 
-        public UserService(IUnitOfWork unitOfWork, ITokenService tokenService, IEmailSender emailSender, UserManager<UserEntity> userManager)
+        public UserService(IUnitOfWork unitOfWork, ITokenService tokenService, IEmailSender emailSender, UserManager<User> userManager)
         {
             _unitOfWork = unitOfWork;
             _tokenService = tokenService;
@@ -26,11 +26,11 @@ namespace FilmsSite.BLL.Services
             _userManager = userManager;
         }
 
-        public async Task<UserDTO> GetByUsernameAsync(string username) => Mapper.Map<UserEntity, UserDTO>(await _unitOfWork.UserManager.FindByNameAsync(username));
+        public async Task<UserDTO> GetByUsernameAsync(string username) => Mapper.Map<User, UserDTO>(await _unitOfWork.UserManager.FindByNameAsync(username));
 
         public async Task<UserDTO> GetByIdAsync(string id)
         {
-            return Mapper.Map<UserEntity, UserDTO>(await _unitOfWork.UserManager.FindByIdAsync(id));
+            return Mapper.Map<User, UserDTO>(await _unitOfWork.UserManager.FindByIdAsync(id));
         }
 
         public async Task<bool> IsUserExist(string username) => await _unitOfWork.UserManager.FindByNameAsync(username) != null;
@@ -60,7 +60,7 @@ namespace FilmsSite.BLL.Services
         {
             var registrationResult = new RegistrationResultDTO();
 
-            var user = Mapper.Map<RegistrationDTO, UserEntity>(registrationDto);
+            var user = Mapper.Map<RegistrationDTO, User>(registrationDto);
             var result = await _unitOfWork.UserManager.CreateAsync(user, registrationDto.Password);
             registrationResult.Succeded = result.Succeeded;
             if (result.Succeeded)

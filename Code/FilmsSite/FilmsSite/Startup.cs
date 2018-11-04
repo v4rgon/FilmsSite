@@ -57,6 +57,7 @@ namespace FilmsSite
             services.AddScoped<IUserRepository, EfUserRepository>();
             services.AddScoped<IPhotoRepository, EfPhotosRepository>();
             services.AddScoped<IRatingsRepository, EfRatingsRepository>();
+            services.AddScoped<IUserFilmsRepository, EfUserFilmsRepository>();
 
             services.AddScoped<ICommentsService, CommentsSerivce>();
             services.AddScoped<IFilmsService, FilmsService>();
@@ -83,7 +84,7 @@ namespace FilmsSite
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection, b => b.MigrationsAssembly("FilmsSite.DAL")));
 
-            services.AddIdentity<UserEntity, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

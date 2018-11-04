@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FilmsSite.DAL.Entities
 {
-    public class FilmEntity
+    public class Film
     {
         public int Id { get; set; }
 
@@ -16,9 +14,11 @@ namespace FilmsSite.DAL.Entities
         public string Description { get; set; }
         public decimal Rating { get; set; }
         public string Duration { get; set; }
-        public List<PhotoEntity> Photos { get; set; }
-        public List<CommentEntity> Comments { get; set; }
+        public List<Photo> Photos { get; set; }
+        public List<Comment> Comments { get; set; }
         public int Metascore { get; set; }
         public string Storyline { get; set; }
+
+        public List<UserFilm> UserFilms { get; } = new List<UserFilm>();
     }
 }

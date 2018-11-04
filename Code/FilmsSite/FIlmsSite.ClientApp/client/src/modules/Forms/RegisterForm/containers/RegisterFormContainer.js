@@ -15,15 +15,6 @@ class RegisterFormContainer extends React.Component {
     checkAvailibleRequest(value);
   };
 
-  onGoogleLoginSuccess = user => {
-     const accessToken = user.accessToken;
-     console.log(accessToken);
-    // AuthStore.setToken(accessToken);
-    // //this.register(email, )
-    // console.log("a");
-    // console.log(user);
-  };
-
   validateValues = ( { username, password, confirm, email }, {syncErrors}) => {
     console.log(syncErrors);
     const errors = {}; 
@@ -49,7 +40,6 @@ class RegisterFormContainer extends React.Component {
       checkIsUsernameAvailible: this.checkIsUsernameAvailible,
       showPassword: visibility,
       isValidating: isValidating,
-      onGoogleLoginSuccess: this.onGoogleLoginSuccess,
       validate: this.validateValues
     };
     return <RegisterForm {...props} />;

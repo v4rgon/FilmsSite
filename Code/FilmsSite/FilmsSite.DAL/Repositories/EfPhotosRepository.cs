@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace FilmsSite.DAL.Repositories
 {
-    public class EfPhotosRepository : Repository<PhotoEntity>, IPhotoRepository
+    public class EfPhotosRepository : Repository<Photo>, IPhotoRepository
     {
         public EfPhotosRepository(ApplicationDbContext context) : base(context) { }
 
-        public IEnumerable<PhotoEntity> GetByFilmId(int id) => DbSet.Where(p => p.Film.Id == id);
+        public IEnumerable<Photo> GetByFilmId(int id) => DbSet.Where(p => p.Film.Id == id);
     }
 }

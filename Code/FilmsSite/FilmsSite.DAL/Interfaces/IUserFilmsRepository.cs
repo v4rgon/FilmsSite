@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace FilmsSite.DAL.Interfaces
 {
-    public interface IRatingsRepository : IRepository<Rating>
+    public interface IUserFilmsRepository : IRepository<UserFilm>
     {
-        IEnumerable<Rating> GetByFilmId(int id);
     }
 }

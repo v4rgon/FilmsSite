@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace FilmsSite.DAL.Interfaces
 {
-    public interface IPhotoRepository : IRepository<PhotoEntity>
+    public interface IPhotoRepository : IRepository<Photo>
     {
-        IEnumerable<PhotoEntity> GetByFilmId(int id);
+        IEnumerable<Photo> GetByFilmId(int id);
     }
 }

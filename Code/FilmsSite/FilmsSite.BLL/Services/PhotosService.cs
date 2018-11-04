@@ -20,22 +20,22 @@ namespace FilmsSite.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<PhotoDTO> GetByFilmId(int filmId) => Mapper.Map<IEnumerable<PhotoEntity>, IEnumerable<PhotoDTO>>(_unitOfWork.Photos.Find(p => p.Film.Id == filmId));
+        public IEnumerable<PhotoDTO> GetByFilmId(int FilmId) => Mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoDTO>>(_unitOfWork.Photos.Find(p => p.Film.Id == FilmId));
 
-        public async Task<PhotoDTO> AddPhotoToFilmAsync(string url, int filmId)
+        public async Task<PhotoDTO> AddPhotoToFilmAsync(string url, int FilmId)
         {
-            var film = _unitOfWork.Films.Get(filmId);
-            if (film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = filmId };
+            var Film = _unitOfWork.Films.Get(FilmId);
+            if (Film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = FilmId };
 
-            var photo = new PhotoEntity()
+            var photo = new Photo()
             {
-                Film = film,
+                Film = Film,
                 Fullsize = url,
                 Shortcut = url,
             };
             _unitOfWork.Photos.Add(photo);
             await _unitOfWork.SaveAsync();
-            return Mapper.Map<PhotoEntity, PhotoDTO>(photo);
+            return Mapper.Map<Photo, PhotoDTO>(photo);
         }
     }
 }

@@ -233,7 +233,7 @@ namespace FilmsSite.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Rating = table.Column<int>(nullable: false),
+                    Value = table.Column<int>(nullable: false),
                     FilmId = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
@@ -248,6 +248,30 @@ namespace FilmsSite.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ratings_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserFilm",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    FilmId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserFilm", x => new { x.UserId, x.FilmId });
+                    table.ForeignKey(
+                        name: "FK_UserFilm_Films_FilmId",
+                        column: x => x.FilmId,
+                        principalTable: "Films",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserFilm_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -317,6 +341,11 @@ namespace FilmsSite.DAL.Migrations
                 name: "IX_Ratings_UserId",
                 table: "Ratings",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserFilm_FilmId",
+                table: "UserFilm",
+                column: "FilmId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -344,6 +373,9 @@ namespace FilmsSite.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Ratings");
+
+            migrationBuilder.DropTable(
+                name: "UserFilm");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

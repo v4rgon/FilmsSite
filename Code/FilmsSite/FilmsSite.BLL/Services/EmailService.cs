@@ -23,7 +23,7 @@ namespace FilmsSite.BLL.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("auth@filmssite.com", "Films Site"),
+                From = new EmailAddress("auth@Filmssite.com", "Films Site"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

@@ -44,7 +44,7 @@ namespace FilmsSite.WebAPI.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost("remove")]
-        public async Task<IActionResult> RemoveComment([FromQuery] int commentId, int filmId)
+        public async Task<IActionResult> RemoveComment([FromQuery] int commentId, int FilmId)
         {
             try
             {

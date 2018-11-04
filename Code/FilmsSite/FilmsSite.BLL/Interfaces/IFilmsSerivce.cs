@@ -6,10 +6,13 @@ namespace FilmsSite.BLL.Interfaces
 {
     public interface IFilmsService
     {
-        Task UpdateRatingAsync(int filmId);
-        Task UpdateFilmAsync(FilmDTO film);
-        Task RemoveFilmAsync(int filmId);
+        Task AddFilmToUsersCollection(int FilmId, string userId);
+        Task RemoveFilmFromUsersCollection(int FilmId, string userId);
+        Task<List<FilmDTO>> GetUsersFilmsCollectionAsync(string userId);
+        Task UpdateRatingAsync(int FilmId);
+        Task UpdateFilmAsync(FilmDTO Film);
+        Task RemoveFilmAsync(int FilmId);
         IEnumerable<FilmDTO> GetAll();
-        FilmDTO GetDetails(int filmId);
+        FilmDTO GetDetails(int FilmId);
     }
 }

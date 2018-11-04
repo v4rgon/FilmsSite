@@ -19,17 +19,17 @@ namespace FilmsSite.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public decimal GetFilmsAverageRating(int filmId)
+        public decimal GetFilmsAverageRating(int FilmId)
         {
-            var ratings = _unitOfWork.Ratings.GetByFilmId(filmId);
-            return !ratings.Any() ? 0 : Convert.ToDecimal(ratings.Average(r => r.Rating));
+            var ratings = _unitOfWork.Ratings.GetByFilmId(FilmId);
+            return !ratings.Any() ? 0 : Convert.ToDecimal(ratings.Average(r => r.Value));
         }
 
         public async Task AddRatingAsync(UpdateRatingDTO ratingDto)
         {
-            var ratingEntity = new RatingEntity()
+            var ratingEntity = new Rating()
             {
-                Rating = ratingDto.Rating,
+                Value = ratingDto.Rating,
                 User = _unitOfWork.Users.Get(ratingDto.UserId),
                 Film = _unitOfWork.Films.Get(ratingDto.FilmId),
             };
@@ -37,27 +37,27 @@ namespace FilmsSite.BLL.Services
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task RemoveRatingAsync(string userId, int filmId)
+        public async Task RemoveRatingAsync(string userId, int FilmId)
         {
-            _unitOfWork.Ratings.Remove(_unitOfWork.Ratings.Find(r => r.User.Id == userId && r.Film.Id == filmId).First());
+            _unitOfWork.Ratings.Remove(_unitOfWork.Ratings.Find(r => r.User.Id == userId && r.Film.Id == FilmId).First());
             await _unitOfWork.SaveAsync();
         }
 
-        public RatingDTO GetRating(int filmId, string userId)
+        public RatingDTO GetRating(int FilmId, string userId)
         {
-            var usersRating = _unitOfWork.Ratings.Find(r => r.Film.Id == filmId && r.User.Id == userId).FirstOrDefault();
-            var film = _unitOfWork.Films.Get(filmId);
+            var usersRating = _unitOfWork.Ratings.Find(r => r.Film.Id == FilmId && r.User.Id == userId).FirstOrDefault();
+            var Film = _unitOfWork.Films.Get(FilmId);
 
-            if (film == null)
+            if (Film == null)
             {
-                throw new FilmNotExistsException("Film not exists!") { FilmId = filmId };
+                throw new FilmNotExistsException("Film not exists!") { FilmId = FilmId };
             }
 
             var ratingResponse = new RatingDTO()
             {
-                Value = _unitOfWork.Films.Get(filmId)?.Rating ?? 0,
+                Value = _unitOfWork.Films.Get(FilmId)?.Rating ?? 0,
                 AlreadyRated = usersRating != null,
-                UsersRating = usersRating?.Rating ?? 0
+                UsersRating = usersRating?.Value ?? 0
             };
             return ratingResponse;
         }

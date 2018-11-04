@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace FilmsSite.DAL.Entities
 {
-    public class UserEntity : IdentityUser
+    public class User : IdentityUser
     {
-        public List<CommentEntity> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
         public string RefreshToken { get; set; }
+        public List<UserFilm> UserFilms { get; } = new List<UserFilm>();
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmsSite.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181027184613_Initial")]
+    [Migration("20181104144135_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace FilmsSite.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("FilmsSite.DAL.Entities.CommentEntity", b =>
+            modelBuilder.Entity("FilmsSite.DAL.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,7 @@ namespace FilmsSite.DAL.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("FilmsSite.DAL.Entities.FilmEntity", b =>
+            modelBuilder.Entity("FilmsSite.DAL.Entities.Film", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,7 +79,7 @@ namespace FilmsSite.DAL.Migrations
                     b.ToTable("Films");
                 });
 
-            modelBuilder.Entity("FilmsSite.DAL.Entities.PhotoEntity", b =>
+            modelBuilder.Entity("FilmsSite.DAL.Entities.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -98,7 +98,7 @@ namespace FilmsSite.DAL.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("FilmsSite.DAL.Entities.RatingEntity", b =>
+            modelBuilder.Entity("FilmsSite.DAL.Entities.Rating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,9 +106,9 @@ namespace FilmsSite.DAL.Migrations
 
                     b.Property<int?>("FilmId");
 
-                    b.Property<int>("Rating");
-
                     b.Property<string>("UserId");
+
+                    b.Property<int>("Value");
 
                     b.HasKey("Id");
 
@@ -119,7 +119,7 @@ namespace FilmsSite.DAL.Migrations
                     b.ToTable("Ratings");
                 });
 
-            modelBuilder.Entity("FilmsSite.DAL.Entities.UserEntity", b =>
+            modelBuilder.Entity("FilmsSite.DAL.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -170,6 +170,19 @@ namespace FilmsSite.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("FilmsSite.DAL.Entities.UserFilm", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<int>("FilmId");
+
+                    b.HasKey("UserId", "FilmId");
+
+                    b.HasIndex("FilmId");
+
+                    b.ToTable("UserFilm");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -282,36 +295,49 @@ namespace FilmsSite.DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("FilmsSite.DAL.Entities.CommentEntity", b =>
+            modelBuilder.Entity("FilmsSite.DAL.Entities.Comment", b =>
                 {
-                    b.HasOne("FilmsSite.DAL.Entities.FilmEntity", "Film")
+                    b.HasOne("FilmsSite.DAL.Entities.Film", "Film")
                         .WithMany("Comments")
                         .HasForeignKey("FilmId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("FilmsSite.DAL.Entities.UserEntity", "User")
+                    b.HasOne("FilmsSite.DAL.Entities.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("FilmsSite.DAL.Entities.PhotoEntity", b =>
+            modelBuilder.Entity("FilmsSite.DAL.Entities.Photo", b =>
                 {
-                    b.HasOne("FilmsSite.DAL.Entities.FilmEntity", "Film")
+                    b.HasOne("FilmsSite.DAL.Entities.Film", "Film")
                         .WithMany("Photos")
                         .HasForeignKey("FilmId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("FilmsSite.DAL.Entities.RatingEntity", b =>
+            modelBuilder.Entity("FilmsSite.DAL.Entities.Rating", b =>
                 {
-                    b.HasOne("FilmsSite.DAL.Entities.FilmEntity", "Film")
+                    b.HasOne("FilmsSite.DAL.Entities.Film", "Film")
                         .WithMany()
                         .HasForeignKey("FilmId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("FilmsSite.DAL.Entities.UserEntity", "User")
+                    b.HasOne("FilmsSite.DAL.Entities.User", "User")
                         .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("FilmsSite.DAL.Entities.UserFilm", b =>
+                {
+                    b.HasOne("FilmsSite.DAL.Entities.Film", "Film")
+                        .WithMany("UserFilms")
+                        .HasForeignKey("FilmId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("FilmsSite.DAL.Entities.User", "User")
+                        .WithMany("UserFilms")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -326,7 +352,7 @@ namespace FilmsSite.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("FilmsSite.DAL.Entities.UserEntity")
+                    b.HasOne("FilmsSite.DAL.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -334,7 +360,7 @@ namespace FilmsSite.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("FilmsSite.DAL.Entities.UserEntity")
+                    b.HasOne("FilmsSite.DAL.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -347,7 +373,7 @@ namespace FilmsSite.DAL.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("FilmsSite.DAL.Entities.UserEntity")
+                    b.HasOne("FilmsSite.DAL.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -355,7 +381,7 @@ namespace FilmsSite.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("FilmsSite.DAL.Entities.UserEntity")
+                    b.HasOne("FilmsSite.DAL.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

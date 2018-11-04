@@ -22,27 +22,27 @@ namespace FilmsSite.BLL.Services
 
         public async Task<CommentDTO> AddCommentAsync(AddCommentDTO comment)
         {
-            var film = _unitOfWork.Films.Get(comment.FilmId);
-            if (film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = comment.FilmId };
+            var Film = _unitOfWork.Films.Get(comment.FilmId);
+            if (Film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = comment.FilmId };
 
             var user = _unitOfWork.Users.Get(comment.UserId);
             if (user == null) throw new UserNotExistsException("User not exists!") { Id = comment.UserId };
 
-            var commentEntity = new CommentEntity()
+            var commentEntity = new Comment()
             {
                 Likes = 0,
                 Disikes = 0,
                 Text = comment.Text,
                 Date = DateTime.Now,
-                Film = film,
+                Film = Film,
                 User = user
             };
             var addedComment = _unitOfWork.Comments.Add(commentEntity);
             await _unitOfWork.SaveAsync();
-            return Mapper.Map<CommentEntity, CommentDTO>(addedComment);
+            return Mapper.Map<Comment, CommentDTO>(addedComment);
         }
 
-        public IEnumerable<CommentDTO> GetByFilmId(int filmId) => Mapper.Map<IEnumerable<CommentEntity>, IEnumerable<CommentDTO>>(_unitOfWork.Comments.GetByFilmId(filmId));
+        public IEnumerable<CommentDTO> GetByFilmId(int FilmId) => Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(_unitOfWork.Comments.GetByFilmId(FilmId));
 
         public async Task RemoveCommentAsync(int commentId)
         {

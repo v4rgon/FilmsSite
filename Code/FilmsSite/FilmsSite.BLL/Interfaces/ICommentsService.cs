@@ -7,7 +7,7 @@ namespace FilmsSite.BLL.Interfaces
     public interface ICommentsService
     {
         Task<CommentDTO> AddCommentAsync(AddCommentDTO comment);
-        IEnumerable<CommentDTO> GetByFilmId(int filmId);
+        IEnumerable<CommentDTO> GetByFilmId(int FilmId);
         Task RemoveCommentAsync(int commentId);
     }
 }

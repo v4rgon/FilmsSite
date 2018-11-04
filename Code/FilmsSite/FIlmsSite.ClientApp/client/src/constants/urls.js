@@ -6,6 +6,7 @@ export const urls = {
   forgetPassword: "/password/forget",
   login: "/login",
   films: "/films",
+  collection: "/collection",
   filmDetails: "/films/details/:id",
 
   admin: "/admin/films",
