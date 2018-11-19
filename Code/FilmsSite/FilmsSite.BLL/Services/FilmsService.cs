@@ -21,10 +21,10 @@ namespace FilmsSite.BLL.Services
             _ratingsService = ratingsService;
         }
 
-        public async Task AddFilmToUsersCollection(int FilmId, string userId)
+        public async Task AddFilmToUsersCollection(int filmId, string userId)
         {
-            var film = _unitOfWork.Films.Get(FilmId);
-            if (film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = FilmId };
+            var film = _unitOfWork.Films.Get(filmId);
+            if (film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = filmId };
 
             var user = await _unitOfWork.UserManager.FindByIdAsync(userId);
 
@@ -33,9 +33,9 @@ namespace FilmsSite.BLL.Services
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task RemoveFilmFromUsersCollection(int FilmId, string userId)
+        public async Task RemoveFilmFromUsersCollection(int filmId, string userId)
         {
-            var film = _unitOfWork.UserFilms.SingleOrDefault(f => f.FilmId == FilmId && f.UserId == userId);
+            var film = _unitOfWork.UserFilms.SingleOrDefault(f => f.FilmId == filmId && f.UserId == userId);
             if (film != null) _unitOfWork.ApplicationDataBaseContext.UserFilms.Remove(film);
 
             await _unitOfWork.SaveAsync();
@@ -50,42 +50,42 @@ namespace FilmsSite.BLL.Services
             return films;
         }
 
-        public async Task UpdateRatingAsync(int FilmId)
+        public async Task UpdateRatingAsync(int filmId)
         {
-            var Film = _unitOfWork.Films.Get(FilmId);
-            if (Film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = FilmId };
-            Film.Rating = _ratingsService.GetFilmsAverageRating(FilmId);
+            var film = _unitOfWork.Films.Get(filmId);
+            if (film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = filmId };
+            film.Rating = _ratingsService.GetFilmsAverageRating(filmId);
 
-            _unitOfWork.Films.Update(Film);
+            _unitOfWork.Films.Update(film);
             await _unitOfWork.SaveAsync();
         }
 
         public async Task UpdateFilmAsync(FilmDTO updatedFilm)
         {
-            var Film = _unitOfWork.Films.Get(updatedFilm.Id);
-            if (Film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = updatedFilm.Id };
+            var film = _unitOfWork.Films.Get(updatedFilm.Id);
+            if (film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = updatedFilm.Id };
 
-            Mapper.Map(updatedFilm, Film);
-            _unitOfWork.Films.Update(Film);
+            Mapper.Map(updatedFilm, film);
+            _unitOfWork.Films.Update(film);
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task RemoveFilmAsync(int FilmId)
+        public async Task RemoveFilmAsync(int filmId)
         {
-            var Film = _unitOfWork.Films.Get(FilmId);
-            if (Film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = FilmId };
+            var film = _unitOfWork.Films.Get(filmId);
+            if (film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = filmId };
 
-            _unitOfWork.Films.Remove(Film);
+            _unitOfWork.Films.Remove(film);
             await _unitOfWork.SaveAsync();
         }
 
         public IEnumerable<FilmDTO> GetAll() => Mapper.Map<IEnumerable<Film>, IEnumerable<FilmDTO>>(_unitOfWork.Films.All);
 
-        public FilmDTO GetDetails(int FilmId)
+        public FilmDTO GetDetails(int filmId)
         {
-            var Film = _unitOfWork.Films.Get(FilmId);
-            if (Film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = FilmId };
-            return Mapper.Map<Film, FilmDTO>(Film);
+            var film = _unitOfWork.Films.Get(filmId);
+            if (film == null) throw new FilmNotExistsException("Film not exists!") { FilmId = filmId };
+            return Mapper.Map<Film, FilmDTO>(film);
         }
     }
 }
